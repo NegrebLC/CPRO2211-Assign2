@@ -32,10 +32,8 @@ public class Contact
     public Category Category { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime DateAdded { get; set; } = DateTime.UtcNow;
+    public DateTime DateAdded { get; set; } = DateTime.Now;
 
     // Read-only property to create a URL-friendly slug
     public string Slug => $"{FirstName}-{LastName}".ToLower().Replace(" ", "-");
-
-    // Additional properties or methods can be added here
 }
