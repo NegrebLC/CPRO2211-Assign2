@@ -1,26 +1,41 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CPRO2211_Assign2.Models
+public class Contact
 {
-    public class Contact
-    {
-        public int ContactId { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter a name")]
-        public string Name { get; set; } = string.Empty;
+    [Required]
+    public string FirstName { get; set; }
 
-        [Phone(ErrorMessage = "Please enter a valid phone number")]
-        public string PhoneNumber { get; set; }
+    [Required]
+    public string LastName { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
-        public string Email { get; set; }
+    [Required]
+    [Phone]
+    public string Phone { get; set; }
 
-        public string Category { get; set; }
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 
-        public string Organization { get; set; }
+    // Optional Organization Field
+    public string Organization { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime DateAdded { get; set; }
-    }
+    // Foreign Key Relationship
+    [Required]
+    [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category")]
+    public int CategoryId { get; set; }
+
+    public Category Category { get; set; }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime DateAdded { get; set; } = DateTime.UtcNow;
+
+    // Read-only property to create a URL-friendly slug
+    public string Slug => $"{FirstName}-{LastName}".ToLower().Replace(" ", "-");
+
+    // Additional properties or methods can be added here
 }
