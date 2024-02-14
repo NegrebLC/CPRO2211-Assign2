@@ -4,28 +4,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Contact
 {
-    [Key]
     public int Id { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Please enter a first name!")]
     public string FirstName { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Please enter a last name!")]
     public string LastName { get; set; }
 
-    [Required]
-    [Phone]
+    [Required(ErrorMessage = "Please enter a valid phone number!")]
+    [Phone(ErrorMessage = "Please enter a valid phone number!")]
     public string Phone { get; set; }
 
-    [Required]
-    [EmailAddress]
+    [Required(ErrorMessage = "Please enter a valid email!")]
+    [EmailAddress(ErrorMessage = "Please enter a valid email!")]
     public string Email { get; set; }
 
     // Optional Organization Field
-    public string Organization { get; set; }
+    public string? Organization { get; set; } = string.Empty;
 
     // Foreign Key Relationship
-    [Required]
+    [Required(ErrorMessage = "Please enter a valid category!")]
     [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category")]
     public int CategoryId { get; set; }
 

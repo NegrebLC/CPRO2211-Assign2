@@ -1,32 +1,23 @@
-using CPRO2211_Assign2.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CPRO2211_Assign2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ContactContext Context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        //Constructor accepts DB context object that's enabled by DI
+        public HomeController(ContactContext ctx)
         {
-            _logger = logger;
+            Context = ctx;
         }
+
 
         public IActionResult Index()
         {
-            return View();
+            var contacts = Context.Contacts.OrderBy(c => c.FirstName).ToList();
+            return View(contacts);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
