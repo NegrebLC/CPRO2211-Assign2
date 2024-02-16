@@ -28,7 +28,7 @@ public class Contact
     [Range(1, int.MaxValue, ErrorMessage = "Please select a valid category")]
     public int CategoryId { get; set; }
 
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime DateAdded { get; set; } = DateTime.Now;

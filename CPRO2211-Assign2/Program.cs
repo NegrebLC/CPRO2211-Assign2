@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 //Add EF core Dependency Injection
 builder.Services.AddDbContext<ContactContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ContactContext")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +28,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}".ToLowerInvariant() // Ensure lowercase URLs
+);
 
 app.Run();
