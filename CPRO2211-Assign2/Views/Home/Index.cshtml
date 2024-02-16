@@ -23,9 +23,9 @@
                     <p class="card-text"><strong>Category:</strong> @item.Category.Name</p>
                     <p class="card-text"><strong>Date Added:</strong> @item.DateAdded.ToShortDateString()</p>
                     <div class="btn-group" role="group">
-                        <a class="btn btn-secondary" asp-controller="Contacts" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-primary" asp-controller="Contacts" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-danger" asp-controller="Contacts" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-secondary" asp-controller="contacts" asp-action="edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-primary" asp-controller="contacts" asp-action="details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-danger" asp-controller="contacts" asp-action="delete" asp-route-id="@item.Id">Delete</a>
                     </div>
                 </div>
             </div>
